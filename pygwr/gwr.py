@@ -182,7 +182,7 @@ class GWRResultSet(list):
     A collection of GWR results.
     """
     
-    def export_csv(self, path):
+    def export_csv(self, path,fmt='%f'):
         """
         Exports the GWR result set into a CSV text file.
         """
@@ -212,20 +212,20 @@ class GWRResultSet(list):
         # Go through all the estimation points and create a feature for each
         for r in self:
             for i in range(ndims):
-                f.write("%f\t" % r.estimation_pt[i])
+                f.write((fmt+"\t") % r.estimation_pt[i])
             for i in range(n-1):
-                f.write("%f\t" % r.sample[i])
+                f.write((fmt+"\t") % r.sample[i])
             for i in range(n):
-                f.write("%f\t" % r.params[i])
+                f.write((fmt+"\t") % r.params[i])
             for i in range(n):
-                f.write("%f\t" % r.result.tvalues[i])
+                f.write((fmt+"\t") % r.result.tvalues[i])
             for i in range(n):
-                f.write("%f\t" % r.result.pvalues[i])
+                f.write((fmt+"\t") % r.result.pvalues[i])
             if r.idx != None:
-                f.write("%f\t" % r.gwr.targets[r.idx])
+                f.write((fmt+"\t") % r.gwr.targets[r.idx])
             else:
                 f.write("\t")
-            f.write("%f\n" % r.prediction)
+            f.write((fmt+"\n") % r.prediction)
         f.close()
     
 
