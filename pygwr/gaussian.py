@@ -18,7 +18,6 @@ class Gaussian:
         Computes the Gaussian kernel for the matrices X and Z.
         """
         X, Z = np.matrix(X, dtype="float32"), np.matrix(Z, dtype="float32")
-        n, m = X.shape[0], Z.shape[0]
-        XX, ZZ = np.multiply(X, X).sum(axis=1), np.multiply(Z, Z).sum(axis=1)
-        d = np.tile(XX, (1, m)) + np.tile(ZZ.T, (n, 1)) - 2 * X * Z.T
+        n = X.shape[0]
+        d = np.square(np.tile(Z,(n,1)) - X).sum(axis=1)
         return np.array(np.exp(-d.T / (2. * sigma * sigma)))
