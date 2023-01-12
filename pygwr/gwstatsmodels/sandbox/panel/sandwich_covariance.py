@@ -451,7 +451,10 @@ def S_crosssection(x, group):
     This is used by cov_cluster and indirectly verified
 
     '''
-    x_group_sums = group_sums(x, group).T  #TODO: why transposed
+    
+    #needs groupsums
+
+    x_group_sums = group_sums(x, group)
 
     return S_white_simple(x_group_sums)
 
